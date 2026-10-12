@@ -36,3 +36,7 @@ package-lock.json
 .env
 .env.local
 .env.*.local
+
+# Local helper scripts
+push-to-github.bat
+
