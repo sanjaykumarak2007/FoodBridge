@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Locations & Live Digital Board | FoodBridge – Connecting Surplus to Smiles</title>
+  <meta name="description" content="View sample FoodBridge community distribution centers and the real-time public digital food availability board.">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-badge"><i class="fa-solid fa-bowl-food"></i></span>
+        <span class="brand-text">Food<span>Bridge</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="locations.html" class="nav-link active">Locations & Live Board</a></li>
+          <li><a href="donate.html" class="nav-link">Donate Food</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="donate.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <span>Donate Food</span>
+        </a>
+        <button class="nav-mobile-toggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <span class="section-pill orange">
+        <i class="fa-solid fa-location-dot"></i> Community Distribution Network
+      </span>
+      <h1 class="page-title">Distribution Centers &amp; Live Board</h1>
+      <p class="page-desc">
+        Explore our neighborhood distribution hubs and the <strong>Digital Food Availability Board</strong> designed for civic shelters and citizens without smartphone access.
+      </p>
+      <div style="margin-top: 1rem;">
+        <span class="badge badge-warning" style="font-size: 0.8rem; padding: 0.4rem 0.9rem;">
+          <i class="fa-solid fa-circle-exclamation"></i> DEMO NOTICE: All distribution centers below are simulated sample locations for the Viksit Bharat Hackathon prototype.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Section 1: The 3 Sample Distribution Centers -->
+    <section class="centers-section">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-pill green">
+          <i class="fa-solid fa-warehouse"></i> Verified Food Hubs
+        </span>
+        <h2 class="section-title">Sample Distribution Centers</h2>
+        <p class="section-subtitle">
+          Equipped with food-grade warming cabinets, thermal inspection kits, and walk-in community dining facilities.
+        </p>
+      </div>
+
+      <!-- 3 Center Cards Rendered via JS -->
+      <div class="centers-grid" id="distribution-centers-grid">
+        <!-- Rendered by locations.js -->
+      </div>
+    </section>
+
+    <!-- Section 2: Demonstration Digital Food Availability Board -->
+    <section id="digital-board" class="digital-board-wrapper">
+      <div class="board-header">
+        <div class="board-title-group">
+          <div class="board-led-badge">
+            <span class="pulse-dot"></span> LIVE KIOSK
+          </div>
+          <div>
+            <h2 style="color: white; font-size: 1.5rem; font-family: 'Outfit', sans-serif; margin-bottom: 0.15rem;">
+              Community Digital Food Board
+            </h2>
+            <p style="color: #94a3b8; font-size: 0.825rem;">
+              Public Outdoor LED Display Simulation • No Smartphone Required • Free Meals For All In Need
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <div class="board-clock-ticker" id="digital-board-clock">
+            <!-- Dynamic clock rendered here -->
+          </div>
+
+          <button type="button" class="btn btn-sm btn-yellow" id="board-audio-btn" title="Simulate public voice broadcast">
+            <i class="fa-solid fa-volume-high"></i> Voice Readout
+          </button>
+
+          <button type="button" class="btn btn-sm btn-outline" style="border-color: #334155; color: #cbd5e1;" id="board-refresh-btn">
+            <i class="fa-solid fa-rotate"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Marquee / Ticker Info Banner -->
+      <div class="board-ticker-banner">
+        <i class="fa-solid fa-bullhorn" style="font-size: 1.1rem; color: #fbbf24;"></i>
+        <span>
+          <strong>ANNOUNCEMENT:</strong> Only food inspected and approved by FoodBridge Response Crew is served. Bring clean containers or eat at on-site dining tables.
+        </span>
+      </div>
+
+      <!-- Filter Bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <label for="board-center-filter" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">
+            Filter by Center:
+          </label>
+          <select id="board-center-filter" style="background: #1e293b; color: white; border: 1px solid #334155; padding: 0.45rem 0.95rem; border-radius: var(--radius-sm); font-size: 0.85rem; outline: none;">
+            <option value="all">All Distribution Centers</option>
+            <option value="center-1">Seva Kendra Community Hub (Sector 4)</option>
+            <option value="center-2">Annapurna Relief Center (Railway Station)</option>
+            <option value="center-3">Hope Care Urban Kitchen (Ambedkar Nagar)</option>
+          </select>
+        </div>
+
+        <div>
+          <span class="badge badge-success" id="board-active-count">
+            Loading batches...
+          </span>
+        </div>
+      </div>
+
+      <!-- Digital Board Dynamic Food Grid -->
+      <div class="board-grid" id="digital-board-grid">
+        <!-- Dynamically rendered approved donations from LocalStorage -->
+      </div>
+
+      <div style="margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid #1f2937; text-align: center; font-size: 0.8rem; color: #64748b;">
+        <i class="fa-solid fa-circle-info"></i> This digital board automatically updates when an administrator approves a donation in the 
+        <a href="admin.html" style="color: var(--accent-yellow); text-decoration: underline;">Admin Dashboard</a>.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>
+            <span class="logo-badge" style="width: 32px; height: 32px; font-size: 1rem;"><i class="fa-solid fa-bowl-food"></i></span>
+            FoodBridge
+          </h3>
+          <p>
+            Connecting surplus food from hotels, caterers, and events to underprivileged distribution centers. Save Food. Share Hope. Fight Hunger.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Pages</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home Overview</a></li>
+            <li><a href="donate.html" class="footer-link">Donate Surplus Food</a></li>
+            <li><a href="locations.html" class="footer-link">Sample Centers</a></li>
+            <li><a href="#digital-board" class="footer-link">Live Public Kiosk</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Inclusivity</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Zero Smartphone Barrier</a></li>
+            <li><a href="#" class="footer-link">Multilingual Audio Kiosks</a></li>
+            <li><a href="#" class="footer-link">Civic LED Integrations</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Admin Demo</h4>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.75rem;">
+            Approve donations to see them appear live above:
+          </p>
+          <a href="admin.html" class="admin-demo-link">
+            <i class="fa-solid fa-lock-open"></i> Demo Admin Portal
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 FoodBridge – Connecting Surplus to Smiles.</div>
+        <div>Viksit Bharat Hackathon Demo Prototype</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/locations.js"></script>
+</body>
+</html>
